@@ -1,11 +1,12 @@
 const OpenAI = require("openai");
-
-const openai = new OpenAI({
-    apiKey: process.env.GPT_API_KEY
-});
+require("dotenv").config();
 
 async function promptGPT(weather) {
     try {
+        const openai = new OpenAI({
+            apiKey: process.env.GPT_API_KEY
+        });
+        
         const prompt = `Based on this data, make clothing recomendations:
         temperature: ${weather.temperature} ${weather.temperatureUnit}
         wind speed: ${weather.windSpeed}
