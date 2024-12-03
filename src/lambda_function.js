@@ -20,7 +20,7 @@ exports.handler = async (event) => {
                 },
                 body: JSON.stringify({
                     success: false,
-                    data: "Invalid location"
+                    error: "Invalid location"
                 }),
             };
         }
@@ -43,7 +43,8 @@ exports.handler = async (event) => {
             },
             body: JSON.stringify({
                 success: true,
-                data: data
+                data: data,
+                weather: weather
             }),
         };
     } catch (err) {

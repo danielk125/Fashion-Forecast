@@ -22,7 +22,7 @@ app.get("/clothing/:location", async (rec, res) => {
         if (weather == undefined) {
             return res.status(400).json({
                 success: false,
-                data: "Invalid location"
+                error: "Invalid location"
             })
         }
 
