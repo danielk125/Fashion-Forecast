@@ -18,6 +18,14 @@ app.get("/clothing/:location", async (rec, res) => {
         longitude = location.lng;
 
         weather = await getWeatherForecast(latitude, longitude);
+
+        if (weather == undefined) {
+            return res.status(400).json({
+                success: false,
+                data: "Invalid location"
+            })
+        }
+
         weather = weather.properties.periods[0];
         weather = {
             temperature: weather.temperature,
@@ -26,8 +34,6 @@ app.get("/clothing/:location", async (rec, res) => {
             probabilityOfPrecipitation: weather.probabilityOfPrecipitation.value ?? 0.0,
             isDaytime: weather.isDaytime
         }
-
-        console.log(weather);
 
         data = await manageData(weather);
 

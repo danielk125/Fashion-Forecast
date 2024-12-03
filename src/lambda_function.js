@@ -11,6 +11,20 @@ exports.handler = async (event) => {
         const longitude = location.lng;
 
         let weather = await getWeatherForecast(latitude, longitude);
+
+        if (weather == undefined) {
+            return {
+                statusCode: 400,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    success: false,
+                    data: "Invalid location"
+                }),
+            };
+        }
+
         weather = weather.properties.periods[0];
         weather = {
             temperature: weather.temperature,
